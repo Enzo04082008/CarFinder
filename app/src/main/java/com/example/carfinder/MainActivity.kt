@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -104,19 +104,28 @@ fun MainScreen() {
                         .padding(top = 65.dp, start = 16.dp, end = 16.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    IconButton(
-                        onClick = {
-                        // Abre a Aba lateral
-                        scope.launch {
-                            drawerState.open()
+                    Row{
+                        IconButton(
+                            onClick = {
+                                // Abre a Aba lateral
+                                scope.launch {
+                                    drawerState.open()
+                                }
+                            }
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_menu_24),
+                                contentDescription = "Menu",
+                                tint = Color.White,
+                                modifier = Modifier.size(32.dp)
+                            )
                         }
-                    }
-                    ) {
+
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_menu_24),
-                            contentDescription = "Menu",
-                            tint = Color.White,
-                            modifier = Modifier.size(32.dp)
+                            painter = painterResource(id = R.mipmap.car_finder_image_round),
+                            contentDescription = "Logo",
+                            tint = Color(rgb(255, 255, 255)),
+                            modifier = Modifier.size(500.dp)
                         )
                     }
                 }
