@@ -6,7 +6,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.carfinder.ui.theme.CarFinderTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,5 +66,20 @@ fun SettingsScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SettingsScreenPreview(){
+    CarFinderTheme {
+        var darkMode by remember { mutableStateOf(false) }
+        var notifications by remember { mutableStateOf(true) }
+        SettingsScreen(
+            darkModeEnabled = darkMode,
+            onDarkModeChanged = { darkMode = it },
+            notificationsEnabled = notifications,
+            onNotificationsChanged = { notifications = it }
+        )
     }
 }
