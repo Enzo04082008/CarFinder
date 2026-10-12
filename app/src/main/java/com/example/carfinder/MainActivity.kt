@@ -1,11 +1,14 @@
 package com.example.carfinder
 
+import android.R.attr.start
 import android.graphics.Color.rgb
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -76,7 +79,11 @@ fun MainScreen() {
                     selected = false,
                     onClick = { /*Ação*/ }
                 )
-
+                NavigationDrawerItem(
+                    label = { Text("Sobre")},
+                    selected = false,
+                    onClick = { /*Ação*/ }
+                )
             }
         }
     ) {
@@ -104,13 +111,17 @@ fun MainScreen() {
                         .padding(top = 65.dp, start = 16.dp, end = 16.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    Row{
+                    Row(modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
                         IconButton(
                             onClick = {
                                 // Abre a Aba lateral
                                 scope.launch {
                                     drawerState.open()
                                 }
+
                             }
                         ) {
                             Icon(
@@ -121,12 +132,14 @@ fun MainScreen() {
                             )
                         }
 
-                        Icon(
-                            painter = painterResource(id = R.mipmap.car_finder_image_round),
-                            contentDescription = "Logo",
-                            tint = Color(rgb(255, 255, 255)),
-                            modifier = Modifier.size(500.dp)
-                        )
+                        Box() {
+                            Image(
+                                painter = painterResource(id = R.drawable.carfinder),
+                                contentDescription = "Logo",
+                                modifier = Modifier
+                                    .size(150.dp)
+                            )
+                        }
                     }
                 }
             }
