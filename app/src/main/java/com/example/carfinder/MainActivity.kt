@@ -1,6 +1,7 @@
 package com.example.carfinder
 
 import android.R.attr.start
+import android.content.Intent
 import android.graphics.Color.rgb
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -31,9 +32,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.carfinder.ui.theme.CarFinderTheme
 import kotlinx.coroutines.launch
 
@@ -56,6 +61,7 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     // Animações
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     //ModalNavigationDrawer
     ModalNavigationDrawer(
@@ -70,9 +76,12 @@ fun MainScreen() {
                 )
                 HorizontalDivider()
                 NavigationDrawerItem(
-                    label = { Text("Ínicio")},
+                    label = { Text("Pesquisar")},
                     selected = false,
-                    onClick = { /*Ação*/ }
+                    onClick = {
+                        val intent = Intent(context, SearchScreen::class.java)
+                        context.startActivity(intent)
+                    }
                 )
                 NavigationDrawerItem(
                     label = { Text("Configurações")},
@@ -147,3 +156,4 @@ fun MainScreen() {
     }
 
 }
+
