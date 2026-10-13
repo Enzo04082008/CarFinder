@@ -1,5 +1,9 @@
 package com.example.carfinder
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -10,9 +14,31 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.carfinder.ui.theme.CarFinderTheme
 
+
+class SettingsScreen : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            CarFinderTheme {
+                    // Criamos os estados reativos aqui no onCreate
+                    var darkMode by remember { mutableStateOf(false) }
+                    var notifications by remember { mutableStateOf(true) }
+
+                    // Passamos os estados e as funções que atualizam eles
+                    SettingsScreenCode(
+                        darkModeEnabled = darkMode,
+                        onDarkModeChanged = { newValue -> darkMode = newValue },
+                        notificationsEnabled = notifications,
+                        onNotificationsChanged = { newValue -> notifications = newValue }
+                    )
+            }
+        }
+    }
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(
+fun SettingsScreenCode(
     darkModeEnabled: Boolean,
     onDarkModeChanged: (Boolean) -> Unit,
     notificationsEnabled: Boolean,
@@ -75,7 +101,7 @@ fun SettingsScreenPreview(){
     CarFinderTheme {
         var darkMode by remember { mutableStateOf(false) }
         var notifications by remember { mutableStateOf(true) }
-        SettingsScreen(
+        SettingsScreenCode(
             darkModeEnabled = darkMode,
             onDarkModeChanged = { darkMode = it },
             notificationsEnabled = notifications,

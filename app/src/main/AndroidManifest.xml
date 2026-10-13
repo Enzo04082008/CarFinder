@@ -27,6 +27,11 @@
         <activity
             android:name=".SearchScreen"
             android:exported="false" />
+
+        <activity
+            android:name=".SettingsScreen"
+            android:exported="false" />
+
     </application>
 
 </manifest>

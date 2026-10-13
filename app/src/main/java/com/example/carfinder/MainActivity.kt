@@ -86,7 +86,8 @@ fun MainScreen() {
                 NavigationDrawerItem(
                     label = { Text("Configurações")},
                     selected = false,
-                    onClick = { /*Ação*/ }
+                    onClick = { val intent = Intent(context, SettingsScreen::class.java)
+                        context.startActivity(intent) }
                 )
                 NavigationDrawerItem(
                     label = { Text("Sobre")},
