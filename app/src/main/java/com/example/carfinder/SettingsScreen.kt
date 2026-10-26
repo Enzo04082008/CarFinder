@@ -20,18 +20,16 @@ class SettingsScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CarFinderTheme {
-                    // Criamos os estados reativos aqui no onCreate
-                    var darkMode by remember { mutableStateOf(false) }
-                    var notifications by remember { mutableStateOf(true) }
+            val isDark by ThemeManager.isDarkMode.collectAsState()
+            CarFinderTheme(darkTheme = isDark) {
+                var notifications by remember { mutableStateOf(true) }
 
-                    // Passamos os estados e as funções que atualizam eles
-                    SettingsScreenCode(
-                        darkModeEnabled = darkMode,
-                        onDarkModeChanged = { newValue -> darkMode = newValue },
-                        notificationsEnabled = notifications,
-                        onNotificationsChanged = { newValue -> notifications = newValue }
-                    )
+                SettingsScreenCode(
+                    darkModeEnabled = isDark,
+                    onDarkModeChanged = { ThemeManager.setDarkMode(it) },
+                    notificationsEnabled = notifications,
+                    onNotificationsChanged = { notifications = it }
+                )
             }
         }
     }
@@ -80,7 +78,8 @@ fun SettingsScreenCode(
             }
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
